@@ -1,0 +1,26 @@
+html, button, input, select, textarea, 
+.puge-g [class *= "pure-u"] {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    color: #333;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.navigation {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid gray;
+}
+
+.footer {
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid gray;
+    color: gray;
+    font-size: 0.8rem;
+}
