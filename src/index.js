@@ -6,6 +6,7 @@ import App from './components/App';
 import About from './components/About';
 import Projects from './components/Projects';
 import Articles from './components/Articles';
+import Article from './components/Article';
 import NotFound from './components/404';
 
 ReactDOM.render(
@@ -16,6 +17,7 @@ ReactDOM.render(
                 <Route path="/about" element={<About />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/articles" element={<Articles />} />
+                <Route path="/article" element={<Article />} />
                 <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>

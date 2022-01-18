@@ -20,6 +20,12 @@ ___
 
 ***
 
+# Math Expressions
+
+Let $n\in\mathbb{Z}$ such that $\exists k\in\mathbb{Z}$ where $n=2k$. Then, we call $x$ **even**.
+
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^nx_i$$
+
 
 ## Typographic replacements
 
@@ -120,6 +126,24 @@ var foo = function (bar) {
 };
 
 console.log(foo(5));
+```
+
+CSS:
+
+``` css
+    .codebox {
+        /* Below are styles for the codebox (not the code itself) */
+        border:1px solid black;
+        background-color:#EEEEFF;
+        width:300px;
+        overflow:auto;
+        padding:10px;
+    }
+    .codebox code {
+        /* Styles in here affect the text of the codebox */
+        font-size:0.9em;
+        /* You could also put all sorts of styling here, like different font, color, underline, etc. for the code. */
+    }
 ```
 
 ## Tables
