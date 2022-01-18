@@ -27,6 +27,72 @@
     padding: 0;
 }
 
+
+.tagButton,
+.tagButtonSelected {
+    display: inline-block;
+    line-height: 0.8rem;
+    font-size: 0.75rem;
+    background: none;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    padding: 0.3rem 0.3rem;
+    margin: 0 0.35rem 0.35rem 0;
+}
+
+.tagButtonSelected {
+    background-color: lightgray;
+}
+
+.tagButton:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.tagButtonSelected:hover {
+    cursor: pointer;
+}
+
+.timeline {
+    margin-top: 10px;
+}
+
+.timelineYear {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.5rem;
+}
+
+.timelineDate {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 0.8rem;
+    position: relative;
+    top: -1rem;
+}
+
+.timelineList {
+    list-style: none;
+    margin-left: 20px;
+}
+
+.timelineContent {
+    display: inline-block;
+    line-height: 1rem;
+    margin-left: 20px;
+}
+
+.timelineContent>a {
+    color: #333;
+    text-decoration: none;
+}
+
+.timelineContent>a:hover {
+    text-decoration: underline;
+    color: gray;
+}
+
+/********************************
+ * Article Content
+ ********************************/
 .articleContent pre {
     overflow: auto;
     padding: 10px;

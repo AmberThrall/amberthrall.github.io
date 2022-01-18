@@ -6,8 +6,8 @@ class About extends React.Component {
             <>
                 <h1>My Name is Amber Thrall</h1>
                 <p>
-                    I am a mathematician and computer scientist interested in backend development, programming language theory and algebra. 
-                    I have a bachelors of science in mathematics from Univeristy of Washington.
+                    I am a mathematician and computer scientist interested in backend development and algebra. 
+                    I received a bachelors of science in mathematics from Univeristy of Washington in 2018.
                 </p>
                 <p>
                     As a mathematician, I have published two articles relating to eigenvalues:
