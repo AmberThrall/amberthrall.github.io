@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Linear",
+        "description": "Linear is a C++14 linear algebra all-header library.",
+        "tags": [ "C++", "Math" ],
+        "urls": [
+            { "label": "GitHub", "url": "https://github.com/AmberThrall/Linear" }
+        ]
+    },
+    {
+        "name": "rftps",
+        "description": "FTP Server written in Ruby.",
+        "tags": [ "Ruby", "Server" ],
+        "urls": [
+            { "label": "GitHub", "url": "https://github.com/AmberThrall/rftps" }
+        ]
+    },
+    {
+        "name": "lalrb",
+        "description": "LALR(1) parser generator written in Ruby.",
+        "tags": [ "Ruby", "Parsing" ],
+        "urls": [
+            { "label": "GitHub", "url": "https://github.com/AmberThrall/lalrrb" }
+        ]
+    },
+    {
+        "name": "Todo-App",
+        "description": "Web-based todo app powered by React.",
+        "tags": [ "HTML", "CSS", "Javascript", "React" ],
+        "urls": [
+            { "label": "Homepage", "url": "https://amber.thrall.me/Todo-App/" },
+            { "label": "GitHub", "url": "https://github.com/AmberThrall/Todo-App" }
+        ]
+    }
+]

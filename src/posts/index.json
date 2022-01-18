@@ -2,13 +2,13 @@
     {
         "title": "Sample Article",
         "posted": "2022-01-17",
-        "file": "/Sample_Article.md",
+        "file": "Sample_Article.md",
         "tags": [ "Test", "Sample" ]
     },
     {
         "title": "Another Article",
         "posted": "2022-01-18",
-        "file": "/Sample_Article.md",
+        "file": "Sample_Article.md",
         "tags": [ "Test", "Sample", "Another" ]
     }
 ]

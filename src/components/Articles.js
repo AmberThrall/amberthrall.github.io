@@ -7,8 +7,7 @@ import '../css/Articles.css';
 class Articles extends React.Component {
     render() {
         const numArticles = index.length;
-        const indexReversed = index.reverse();
-        const articles = indexReversed.map((article, id) => {
+        const articles = index.slice().reverse().map((article, id) => {
             const actualId = numArticles - id;
             const tags = article.tags.join(', ');
             return (

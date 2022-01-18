@@ -6,6 +6,10 @@ html, button, input, select, textarea,
     color: #333;
 }
 
+a {
+    color: blue;
+}
+
 .container {
     max-width: 700px;
     margin: 0 auto;
@@ -23,4 +27,24 @@ html, button, input, select, textarea,
     border-top: 1px solid gray;
     color: gray;
     font-size: 0.8rem;
+}
+
+.list {
+    padding: 0;
+}
+
+.listItem {
+    list-style: none;
+    line-height: 1rem;
+}
+
+.title {
+    margin-bottom: 0;
+    line-height: 1.4rem;
+}
+
+.tags {
+    color: gray;
+    font-size: 0.8rem;
+    padding: 0;
 }
