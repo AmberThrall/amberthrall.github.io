@@ -9,7 +9,7 @@ const NAV_ITEMS = [
     { name: "Projects", link: "/projects", local: true },
     { name: "Articles", link: "/articles", local: true },
     { name: "GitHub", link: "https://www.github.com/AmberThrall", local: false },
-    { name: "Contact", link: "/contact", local: true },
+    { name: "Email", link: "mailto:amber@thrall.me", local: false },
 ];
 
 
@@ -18,7 +18,7 @@ class App extends React.Component {
         const nav = NAV_ITEMS.map((item, id) => {
             return (
                 <li className="pure-menu-item" key={id}>
-                    { item.local ? <NavLink className="pure-menu-link" to={item.link}>{item.name}</NavLink> : <a className="pure-menu-link" href={item.link} target="blank">{item.name}</a> }
+                    { item.local ? <NavLink className="pure-menu-link" to={item.link}>{item.name}</NavLink> : <a className="pure-menu-link" href={item.link} target="_blank">{item.name}</a> }
                 </li>
             );
         });
