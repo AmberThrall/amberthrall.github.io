@@ -11,7 +11,7 @@ class Articles extends React.Component {
         
         const allTags = index.map((article) => { return article.tags }).flat().filter((v, i, a) => a.indexOf(v) === i);
         const tagSelect = allTags.map((tag, id) => {
-            return <button className={selectedTags.includes(tag) ? "tagButtonSelected" : "tagButton"} key={id} onClick={() => {
+            return <button className={selectedTags.includes(tag) ? "pure-button pure-button-active tagButton" : "pure-button tagButton"} key={id} onClick={() => {
                 let newTags = selectedTags.slice();
                 if (newTags.includes(tag))
                     newTags.splice(newTags.indexOf(tag), 1);

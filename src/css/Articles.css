@@ -28,25 +28,8 @@
 }
 
 
-.tagButton,
-.tagButtonSelected {
-    display: inline-block;
-    line-height: 0.8rem;
-    font-size: 0.75rem;
-    background: none;
-    border: 1px solid gray;
-    border-radius: 0.5rem;
-    padding: 0.3rem 0.3rem;
-    margin: 0 0.35rem 0.35rem 0;
-}
-
-.tagButtonSelected {
-    background-color: lightgray;
-}
-
-.tagButton:hover {
-    background-color: lightgray;
-    cursor: pointer;
+.tagButton {
+    font-size: 70%;
 }
 
 .tagButtonSelected:hover {
@@ -54,7 +37,7 @@
 }
 
 .timeline {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .timelineYear {
