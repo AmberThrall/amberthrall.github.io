@@ -4,6 +4,7 @@
         "description": "Linear is a C++14 linear algebra all-header library.",
         "tags": [ "C++", "Math" ],
         "urls": [
+            { "label": "Documentation", "url": "https://amber.thrall.me/Linear/doc/html/index.html" },
             { "label": "GitHub", "url": "https://github.com/AmberThrall/Linear" }
         ]
     },
