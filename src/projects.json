@@ -16,7 +16,7 @@
         ]
     },
     {
-        "name": "lalrb",
+        "name": "lalrrb",
         "description": "LALR(1) parser generator written in Ruby.",
         "tags": [ "Ruby", "Parsing" ],
         "urls": [
