@@ -1,20 +1,8 @@
 [
     {
-        "title": "Sample Article",
-        "posted": "2022-01-17",
-        "file": "Sample_Article.md",
-        "tags": [ "Test", "Sample" ]
-    },
-    {
-        "title": "Another Article",
+        "title": "Prime number generation",
         "posted": "2022-01-18",
-        "file": "Sample_Article.md",
-        "tags": [ "Test", "Sample", "Another" ]
-    },
-    {
-        "title": "Article from last year",
-        "posted": "2021-07-01",
-        "file": "Sample_Article.md",
-        "tags": [ "Test", "Sample", "Old" ]
+        "file": "Sieve_of_Eratosthenes.md",
+        "tags": [ "math", "python" ]
     }
 ]

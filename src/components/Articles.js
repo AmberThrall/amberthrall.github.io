@@ -36,7 +36,7 @@ class Articles extends React.Component {
                 <li key={article.id}>
                     <span className="timelineDate">{moment(article.posted).format("MMM Do")}</span>
                     <span className="timelineContent">
-                        <Link to={"/article?id=" + article.id}>{article.title}</Link><br />
+                        <Link to={"/article?id=" + (article.id + 1)}>{article.title}</Link><br />
                         <span className="articleTags">Tags: {article.tags.join(", ")}</span>
                     </span>
                 </li>
