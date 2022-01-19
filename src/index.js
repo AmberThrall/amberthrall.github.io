@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import App from './components/App';
 import About from './components/About';
@@ -10,7 +10,7 @@ import Article from './components/Article';
 import NotFound from './components/404';
 
 ReactDOM.render(
-    <BrowserRouter>
+    <HashRouter basename={process.env.PUBLIC_URL}>
         <Routes>
             <Route path="/" element={<App />}>
                 <Route index element={<About />} />
@@ -21,6 +21,6 @@ ReactDOM.render(
                 <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>
-    </BrowserRouter>,
+    </HashRouter>,
     document.getElementById("root")
 );
