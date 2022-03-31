@@ -18,7 +18,7 @@ class App extends React.Component {
         const nav = NAV_ITEMS.map((item, id) => {
             return (
                 <li className="pure-menu-item" key={id}>
-                    { item.local ? <NavLink className="pure-menu-link" to={item.link}>{item.name}</NavLink> : <a className="pure-menu-link" href={item.link} target="_blank">{item.name}</a> }
+                    { item.local ? <NavLink className="pure-menu-link" to={item.link}>{item.name}</NavLink> : <a className="pure-menu-link" href={item.link} target="_blank" rel="noreferrer">{item.name}</a> }
                 </li>
             );
         });

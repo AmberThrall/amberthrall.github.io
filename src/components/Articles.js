@@ -3,12 +3,20 @@ import moment from 'moment';
 import { Link, useSearchParams } from 'react-router-dom';
 import index from '../posts/index.json';
 import '../css/Articles.css';
+import PropTypes from 'prop-types';
 
 class Articles extends React.Component {
+    static get propTypes() {
+        return {
+            params: PropTypes.any,
+            setParams: PropTypes.any,
+        }
+    }
+
     render() {
         let selectedTags = this.props.params.get("tags") || "";
         selectedTags = selectedTags.split(",").filter((x) => x !== "");
-        
+
         const allTags = index.map((article) => { return article.tags }).flat().filter((v, i, a) => a.indexOf(v) === i);
         const tagSelect = allTags.map((tag, id) => {
             return <button className={selectedTags.includes(tag) ? "pure-button pure-button-active tagButton" : "pure-button tagButton"} key={id} onClick={() => {
@@ -25,7 +33,7 @@ class Articles extends React.Component {
 
         const articles = index.slice().map((article, id) => {
             return { ...article, id: id };
-        }).sort((a, b) => { 
+        }).sort((a, b) => {
             return moment(a.posted).isAfter(moment(b.posted)) ? -1 : 1;
         }).filter((article) => {
             if (selectedTags.length === 0)
@@ -62,7 +70,7 @@ class Articles extends React.Component {
         return (
             <>
                 <h1>Articles</h1>
-                {tagSelect} 
+                {tagSelect}
                 <div className="timeline">
                     {content}
                 </div>
@@ -77,5 +85,3 @@ function ArticlesWrapper(props) {
 }
 
 export default ArticlesWrapper;
-
-

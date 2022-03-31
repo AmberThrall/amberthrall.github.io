@@ -9,8 +9,15 @@ import NotFound from './404';
 import index from '../posts/index.json';
 import '../css/hljs.min.css';
 import '../css/Articles.css';
+import PropTypes from 'prop-types';
 
 class Article extends React.Component {
+    static get propTypes() {
+        return {
+            params: PropTypes.any
+        }
+    }
+
     constructor(props) {
         super(props);
         const id = (parseInt(this.props.params.get("id")) - 1) || 0;
@@ -33,14 +40,12 @@ class Article extends React.Component {
                 if (lang && hljs.getLanguage(lang)) {
                     try {
                         return hljs.highlight(lang, str).value;
-                    } catch (err) {}
+                    } catch (err) { return "error"; }
                 }
 
                 try {
                     return hljs.highlightAuto(str).value;
-                } catch (err) {}
-
-                return '';
+                } catch (err) { return "error"; }
             }
         });
         this.md.use(linkify);
@@ -80,5 +85,3 @@ function ArticleWrapper(props) {
 }
 
 export default ArticleWrapper;
-
-
