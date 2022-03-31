@@ -13,7 +13,6 @@ import '../css/Articles.css';
 class Article extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.params);
         const id = (parseInt(this.props.params.get("id")) - 1) || 0;
 
         this.state = {
@@ -55,10 +54,6 @@ class Article extends React.Component {
         const path = require("../posts/" + this.state.article.file);
         fetch(path).then(response => { return response.text() })
             .then(text => { this.setState({ content: this.md.render(text) }) });
-    }
-
-    renderContent(text) {
-
     }
 
     render() {

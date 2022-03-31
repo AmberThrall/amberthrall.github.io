@@ -4,5 +4,11 @@
         "posted": "2022-01-18",
         "file": "Sieve_of_Eratosthenes.md",
         "tags": [ "math", "python" ]
+    },
+    {
+        "title": "Interpreting a C-like language in rust",
+        "posted": "2022-03-31",
+        "file": "TinyC_rust.md",
+        "tags": [ "languages", "parsing", "rust" ]
     }
 ]
