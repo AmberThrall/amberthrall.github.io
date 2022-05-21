@@ -65,7 +65,8 @@ impl ECS {
     pub fn unregister_entity(&mut self, id: Entity) {
         if id < self.entities.len() {
             self.entities[id] = None;
-            self.components.remove(&id);
+            self.position_components.remove(&id);
+            self.health_components.remove(&id);
         }
     }
 
