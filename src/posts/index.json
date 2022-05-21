@@ -10,5 +10,11 @@
         "posted": "2022-03-31",
         "file": "TinyC_rust.md",
         "tags": [ "languages", "parsing", "rust" ]
+    },
+    {
+        "title": "A small entity component system",
+        "posted": "2022-05-21",
+        "file": "ECS.md",
+        "tags": [ "gamedev", "design", "rust" ]
     }
 ]
