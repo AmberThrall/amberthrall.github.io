@@ -16,5 +16,11 @@
         "posted": "2022-05-21",
         "file": "ECS.md",
         "tags": [ "gamedev", "design", "rust" ]
+    },
+    {
+        "title": "How LR parsing works",
+        "posted": "2022-07-07",
+        "file": "LR_parsing.md",
+        "tags": [ "languages", "parsing" ]
     }
 ]
