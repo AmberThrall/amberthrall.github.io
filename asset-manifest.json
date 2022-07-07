@@ -1,18 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.ffb7fac2.css",
-    "main.js": "/static/js/main.89e0b6d0.js",
+    "main.js": "/static/js/main.edc09686.js",
     "static/media/sadface.png": "/static/media/sadface.836bd6fb90a2967656d8.png",
     "static/media/TinyC_rust.md": "/static/media/TinyC_rust.884f6e4aae40cb5907bc.md",
     "static/media/ECS.md": "/static/media/ECS.ce8804a45b7da3384f28.md",
+    "static/media/LR_parsing.md": "/static/media/LR_parsing.5bb04250e01d8f552c98.md",
     "static/media/Sample_Article.md": "/static/media/Sample_Article.c37fdc2d3c5a650afc08.md",
     "static/media/Sieve_of_Eratosthenes.md": "/static/media/Sieve_of_Eratosthenes.6cf9791b9818c82c0712.md",
     "index.html": "/index.html",
     "main.ffb7fac2.css.map": "/static/css/main.ffb7fac2.css.map",
-    "main.89e0b6d0.js.map": "/static/js/main.89e0b6d0.js.map"
+    "main.edc09686.js.map": "/static/js/main.edc09686.js.map"
   },
   "entrypoints": [
     "static/css/main.ffb7fac2.css",
-    "static/js/main.89e0b6d0.js"
+    "static/js/main.edc09686.js"
   ]
 }
