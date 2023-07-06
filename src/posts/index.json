@@ -22,5 +22,11 @@
         "posted": "2022-07-07",
         "file": "LR_parsing.md",
         "tags": [ "languages", "parsing" ]
+    },
+    {
+        "title": "Building a software renderer",
+        "posted": "2023-07-05",
+        "file": "tinysr.md",
+        "tags": [ "rust", "math", "graphics" ]
     }
 ]

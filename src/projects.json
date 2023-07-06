@@ -9,11 +9,11 @@
         ]
     },
     {
-        "name": "rftps",
-        "description": "FTP Server written in Ruby.",
-        "tags": [ "Ruby", "Server" ],
+        "name": "tinysr",
+        "description": "Small software renderer written in rust.",
+        "tags": [ "Rust", "Math", "Graphics" ],
         "urls": [
-            { "label": "GitHub", "url": "https://github.com/AmberThrall/rftps" }
+            { "label": "GitHub", "url": "https://github.com/AmberThrall/tinysr/" }
         ]
     },
     {

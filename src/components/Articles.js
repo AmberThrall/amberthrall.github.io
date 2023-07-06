@@ -52,7 +52,7 @@ class Articles extends React.Component {
         });
 
         const years = index.map((article) => { return moment(article.posted).year() }).filter((v, i, a) => a.indexOf(v) === i);
-        const content = years.map((year) => {
+        const content = years.reverse().map((year) => {
             const articlesList = articles.filter((x) => x[0] === year).map((x) => { return x[1]; });
             if (articlesList.length === 0)
                 return;
