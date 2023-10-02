@@ -8,6 +8,7 @@ import Projects from './components/Projects';
 import Articles from './components/Articles';
 import Article from './components/Article';
 import NotFound from './components/404';
+import Calendar from './components/Calendar';
 
 ReactDOM.render(
     <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -18,6 +19,7 @@ ReactDOM.render(
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/articles" element={<Articles />} />
                 <Route path="/article" element={<Article />} />
+                <Route path="/calendar" element={<Calendar />} />
                 <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>
