@@ -6,7 +6,7 @@ class About extends React.Component {
             <>
                 <h1>My Name is Amber Thrall</h1>
                 <p>
-                    I am a mathematician and computer scientist interested in backend development and algebra. I am currently a Ph.D graduate student at the University of Washington studying mathematics.
+                    I am a mathematician and computer scientist interested in dynamical systems. I am currently a Ph.D graduate student at Washington State University studying mathematics.
                     I received a bachelors of science in mathematics from University of Washington in 2018.
                 </p>
                 <p>
