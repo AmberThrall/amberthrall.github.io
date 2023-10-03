@@ -28,5 +28,11 @@
         "posted": "2023-07-05",
         "file": "tinysr.md",
         "tags": [ "rust", "math", "graphics" ]
+    },
+    {
+        "title": "A simple example of chaos in 1D",
+        "posted": "2023-10-03",
+        "file": "2xmod1.md",
+        "tags": [ "math", "dynamical systems" ]
     }
 ]
