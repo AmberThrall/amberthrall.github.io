@@ -34,5 +34,11 @@
         "posted": "2023-10-03",
         "file": "2xmod1.md",
         "tags": [ "math", "dynamical systems" ]
+    },
+    {
+        "title": "Markov chains and chaos",
+        "posted": "2023-11-28",
+        "file": "markov_chains_chaos.md",
+        "tags": [ "math", "dynamical systems" ]
     }
 ]
