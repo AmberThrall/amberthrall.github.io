@@ -72,7 +72,7 @@ So our partition should have smaller bins near zero and larger bins near one. On
 
 Notice that the exponent $\beta$ appears to converge to $-\alpha$ as $n$ grows larger.
 
-**Conjecture.** The $\alpha$-map has an invariant density of $\rho(x)=(1-\alpha)x^{1-\alpha}$.
+**Conjecture.** The $\alpha$-map has an invariant density of $\rho(x)=(1-\alpha)x^{-\alpha}$.
 
 ## References
 
