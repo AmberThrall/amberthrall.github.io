@@ -9,6 +9,14 @@
         ]
     },
     {
+        "name": "scomplex",
+        "description": "Simplicial complex construction library written in Rust.",
+        "tags": [ "Rust", "Math", "TDA" ],
+        "urls": [
+            { "label": "GitHub", "url": "https://github.com/AmberThrall/scomplex" }
+        ]
+    },
+    {
         "name": "tinysr",
         "description": "Small software renderer written in rust.",
         "tags": [ "Rust", "Math", "Graphics" ],
@@ -17,20 +25,11 @@
         ]
     },
     {
-        "name": "lalrrb",
-        "description": "LALR(1) parser generator written in Ruby.",
-        "tags": [ "Ruby", "Parsing" ],
+        "name": "rftps",
+        "description": "FTP Server written in Ruby.",
+        "tags": [ "Ruby", "Application" ],
         "urls": [
-            { "label": "GitHub", "url": "https://github.com/AmberThrall/lalrrb" }
-        ]
-    },
-    {
-        "name": "Todo-App",
-        "description": "Web-based todo app powered by React.",
-        "tags": [ "HTML", "CSS", "Javascript", "React" ],
-        "urls": [
-            { "label": "Homepage", "url": "https://amber.thrall.me/Todo-App/" },
-            { "label": "GitHub", "url": "https://github.com/AmberThrall/Todo-App" }
+            { "label": "GitHub", "url": "https://github.com/AmberThrall/rftps" }
         ]
     }
 ]

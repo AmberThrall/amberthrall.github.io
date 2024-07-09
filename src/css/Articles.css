@@ -3,13 +3,9 @@
 }
 
 .articleItem {
-    list-style: none;
-    line-height: 1rem;
 }
 
 .articleTitle {
-    margin-bottom: 0;
-    line-height: 1.4rem;
 }
 
 .articleTitle a {

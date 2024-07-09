@@ -9,7 +9,7 @@ const NAV_ITEMS = [
     { name: "Projects", link: "/projects", local: true },
     { name: "Articles", link: "/articles", local: true },
     { name: "GitHub", link: "https://www.github.com/AmberThrall", local: false },
-    { name: "Email", link: "mailto:amber@thrall.me", local: false },
+    { name: "Email", link: "mailto:amber.thrall@wsu.edu", local: false },
 ];
 
 
