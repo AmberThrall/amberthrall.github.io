@@ -18,18 +18,18 @@
     },
     {
         "name": "tinysr",
-        "description": "Small software renderer written in rust.",
+        "description": "Small software renderer written in Rust.",
         "tags": [ "Rust", "Math", "Graphics" ],
         "urls": [
             { "label": "GitHub", "url": "https://github.com/AmberThrall/tinysr/" }
         ]
     },
     {
-        "name": "rftps",
-        "description": "FTP Server written in Ruby.",
-        "tags": [ "Ruby", "Application" ],
+        "name": "tasm",
+        "description": "x86 assembler targeting for Linux",
+        "tags": [ "Rust", "Application", "Compilers" ],
         "urls": [
-            { "label": "GitHub", "url": "https://github.com/AmberThrall/rftps" }
+            { "label": "GitHub", "url": "https://github.com/AmberThrall/tasm" }
         ]
     }
 ]
