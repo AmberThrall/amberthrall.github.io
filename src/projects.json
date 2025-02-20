@@ -26,7 +26,7 @@
     },
     {
         "name": "tasm",
-        "description": "x86 assembler targeting for Linux",
+        "description": "x86 assembler for Linux",
         "tags": [ "Rust", "Application", "Compilers" ],
         "urls": [
             { "label": "GitHub", "url": "https://github.com/AmberThrall/tasm" }
