@@ -1,14 +1,12 @@
 +++
 date = '2023-11-28T11:37:09-07:00'
-draft = false
+draft = true
 title = 'Markov chains and chaos'
 +++
 
-
-
 In my [previous post](/posts/2xmod1), we explored the dyadic transformation $x_{n+1}=2x_n\bmod1$ on [0,1). We found its behavior was dependent on whether $x_0$ was rational or irrational. We also found if we repeatedly applyed the map to an initial set of particles, its density converged towards the uniform density.
 
-Lets modify our map. Namely, on [0,1/2) we alter our map to be non-linear.
+Let's modify our map. Namely, on [0,1/2) we alter our map to be non-linear.
 $$
     x_{n+1} = \begin{cases}
         x_n + 2^\alpha x_n^{1+\alpha} & 0\le x_n<1/2 \\
@@ -21,12 +19,17 @@ Looking at an individual orbit of the $\alpha$-map (with $\alpha=0.6$), we see t
 
 ![Orbit](/images/orbit_alphamap.png)
 
-Unfortutely, proving that is chaotic is not as simple as before. It is also not as simple to determine its invariant density. With the dyadic transformation we made use of *transfer operators*.
+Unfortunately, proving that is chaotic is not as simple as before. It is also not as simple to determine its invariant density. With the dyadic transformation we made use of *transfer operators*.
 
-**Definition**.[^first] Let $f:M\rightarrow M$ be a surjective map such that the preimage $f^{-1}(x)$ is finite or countable for each $x\in M$. The *Ruelle transfer operator* $\mathcal{L}_f:\mathcal{F}(M,\mathbb{C})\rightarrow\mathcal{F}(M,\mathbb{C})$, where $\mathcal{F}(M,\mathbb{C})$ is the vector space of functions from $M$ to $\mathbb{C}$, is the linear operator given by 
+**Definition**.[^first] Let $f:M\rightarrow M$ be a surjective map such that the preimage $f^{-1}(x)$ is finite or countable for each $x\in M$. 
+The Ruelle transfer operator 
+$\mathcal{L}_f:\mathcal{F}(M,\mathbb{C})\rightarrow\mathcal{F}(M,\mathbb{C})$, 
+where $\mathcal{F}(M,\mathbb{C})$ is the vector space of functions from $M$ to $\mathbb{C}$, is the linear operator given by 
+
 $$
     (\mathcal{L}_f\varphi)(x) = \sum_{y\in f^{-1}(x)}\frac{\varphi(y)}{|\det Df(y)|}.
 $$
+
 Some sources replace the Jacobian determinant with a more general function $g$ with the constraint that $\sum_{y\in f^{-1}(x)}g(y)$ converges for all $x$.
 
 Once you've computed the transfer operator of a map, its corresponding invariant density would be given by finding the eigenfunction corresponding to the eigenvalue 1.

@@ -82,16 +82,20 @@ Since $x_1$ is irrational, the digits $a_1,a_2,\dots$ have no repetition. Theref
 ## Distribution Dynamics
 
 Assume we have a subset $X\subset[0,1)$ with some probability density $\rho_1(x)$. In other words, the probability that some $x\in A\subset X$ is given by
+
 $$\mathbb{P}(x\in A) = \int_A \rho_1(x)\textup{d}{x}.$$
 
 We are interested in how the distribution changes over time. More precisely, let $\rho_2$ be the probability density of the image $(2x\bmod1)(X)$. Repeating this, forms a sequence of probability density functions $\{\rho_n\}$.
 
 We want to find a linear operator $\mathcal{L}$ such that for any density $\rho_n$, $\rho_{n+1}=\mathcal{L}\rho_n$. If such an operator exists, then
+
 $$\mathbb{P}(x_{n+1}\in A) = \mathbb{P}(x_n\in(2x\bmod1)^{-1}(A)).$$
 So 
+
 $$ \int_A\mathcal{L}\rho(x)\textup{d}x = \int_{(2x\bmod1)^{-1}(A)}\rho(x)\textup{d}x.$$
 
 To determine the operator $\mathcal{L}$, let $A=[0,y]$ for some $y\in[0,1)$. Note that $2x\bmod 1$ is two-to-one, and we can explicity determine the preimage. That is,
+
 $$(2x\bmod1)^{-1}([0,y]) = \left[0,\frac{y}{2}\right]\cup\left[\frac{1}{2},\frac{y+1}{2}\right].$$
 
 So 
@@ -102,14 +106,20 @@ $$
 \end{align*}
 $$
 Differentiating both sides gives 
+
 $$ \mathcal{L}\rho(x) = \frac{1}{2}\rho\left(\frac{x}{2}\right) + \frac{1}{2}\rho\left(\frac{x+1}{2}\right).$$
 
 **Remark.** The linear operator $\mathcal{L}$ is a [Ruelle transfer operator](https://en.wikipedia.org/wiki/Transfer_operator).
 
-With our operator $\mathcal{L}$, we get the sequence of density functions $\rho_n=\mathcal{L}^n\rho_1$. Consider the limit 
+With our operator $\mathcal{L}$, we get the sequence of density functions $\rho_n=\mathcal{L}^n\rho_1$. 
+Consider the limit 
+
 $$\lim_{n\rightarrow\infty}\mathcal{L}^n\rho_1=\rho_\infty.$$
+
 If the limit exists, then $\mathcal{L}\rho_\infty=\rho_\infty$. That is $\rho_\infty$ is the *invariant* density under $\mathcal{L}$. Notice that if $\rho(x)=1$, then
+
 $$\mathcal{L}\rho(x) = \frac{1}{2}\rho\left(\frac{x}{2}\right) + \frac{1}{2}\rho\left(\frac{x+1}{2}\right) = 1.$$
+
 Therefore, the uniform density $\rho(x)=1$ is the invariant density under $\mathcal{L}$.
 
 This tells us that for any initial density of particles, repeatedly applying $2x\bmod1$ results in the particles spreading out to the uniform density.

@@ -28,7 +28,7 @@ author = "Amber Thrall"
 info = "Mathematician and Computer Scientist"
 description = "Amber Thrall's personal website"
 avatarurl = "images/440050.jpg"
-favicon = "/images/favicon.ico"
+faviconSVG = "/images/favicon.ico"
 colorScheme = "dark"
 
 # Social links
