@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  How LR parsing works · Amber Thrall
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Amber Thrall">
+<meta name="description" content="Consider the grammar $G$ defined by the production rules below (we use $ to represent the end of input):
+
+$S\rightarrow E$$
+$E\rightarrow E&#43;T$
+$E\rightarrow T$
+$T\rightarrow 0$
+$T\rightarrow 1$
+
+We want to generate a table we can reference to parse text in linear time. LR parsing gives us such a table.
+While parsing an input, for example &ldquo;1&#43;1&rdquo;, we make use of two stacks: state stack and symbol stack.
+
+  Using the parse table
+  
+    
+    Link to heading
+  
+
+The corresponding parse table for our grammar (we&rsquo;ll see how it&rsquo;s generated later) is as follows:">
+<meta name="keywords" content="">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="How LR parsing works">
+  <meta name="twitter:description" content="Consider the grammar $G$ defined by the production rules below (we use $ to represent the end of input):
+$S\rightarrow E$$ $E\rightarrow E&#43;T$ $E\rightarrow T$ $T\rightarrow 0$ $T\rightarrow 1$ We want to generate a table we can reference to parse text in linear time. LR parsing gives us such a table.
+While parsing an input, for example “1&#43;1”, we make use of two stacks: state stack and symbol stack.
+Using the parse table Link to heading The corresponding parse table for our grammar (we’ll see how it’s generated later) is as follows:">
+
+<meta property="og:url" content="http://localhost:1313/posts/lr_parsing/">
+  <meta property="og:site_name" content="Amber Thrall">
+  <meta property="og:title" content="How LR parsing works">
+  <meta property="og:description" content="Consider the grammar $G$ defined by the production rules below (we use $ to represent the end of input):
+$S\rightarrow E$$ $E\rightarrow E&#43;T$ $E\rightarrow T$ $T\rightarrow 0$ $T\rightarrow 1$ We want to generate a table we can reference to parse text in linear time. LR parsing gives us such a table.
+While parsing an input, for example “1&#43;1”, we make use of two stacks: state stack and symbol stack.
+Using the parse table Link to heading The corresponding parse table for our grammar (we’ll see how it’s generated later) is as follows:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-07-07T11:37:09-07:00">
+    <meta property="article:modified_time" content="2022-07-07T11:37:09-07:00">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/lr_parsing/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-dark">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Amber Thrall
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/research/">Research</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact Me</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/lr_parsing/">
+              How LR parsing works
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-07-07T11:37:09-07:00">
+                July 7, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              5-minute read
+            </span>
+          </div>
+          
+          
+          
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>Consider the grammar $G$ defined by the production rules below (we use $ to represent the end of input):</p>
+<ol>
+<li>$S\rightarrow E$$</li>
+<li>$E\rightarrow E+T$</li>
+<li>$E\rightarrow T$</li>
+<li>$T\rightarrow 0$</li>
+<li>$T\rightarrow 1$</li>
+</ol>
+<p>We want to generate a table we can reference to parse text in linear time. LR parsing gives us such a table.</p>
+<p>While parsing an input, for example &ldquo;1+1&rdquo;, we make use of two stacks: state stack and symbol stack.</p>
+<h2 id="using-the-parse-table">
+  Using the parse table
+  <a class="heading-link" href="#using-the-parse-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The corresponding parse table for our grammar (we&rsquo;ll see how it&rsquo;s generated later) is as follows:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">State</th>
+          <th>0</th>
+          <th>1</th>
+          <th>+</th>
+          <th>$</th>
+          <th>E</th>
+          <th>T</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">0</td>
+          <td>$s_3$</td>
+          <td>$s_4$</td>
+          <td></td>
+          <td></td>
+          <td>1</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">1</td>
+          <td></td>
+          <td></td>
+          <td>$s_5$</td>
+          <td>A</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">2</td>
+          <td>$r_3$</td>
+          <td>$r_3$</td>
+          <td>$r_3$</td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">3</td>
+          <td>$r_4$</td>
+          <td>$r_4$</td>
+          <td>$r_4$</td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">4</td>
+          <td>$r_5$</td>
+          <td>$r_5$</td>
+          <td>$r_5$</td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">5</td>
+          <td>$s_3$</td>
+          <td>$s_4$</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>6</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">6</td>
+          <td>$r_2$</td>
+          <td>$r_2$</td>
+          <td>$r_2$</td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<p>For each state, we assign an action for the next input (0,1,+,$). The last two columns indicate which state to jump to when reducing.</p>
+<p>LR uses a bottom-up, shift-reduce parsing method. There are 3 valid actions per step:</p>
+<ol>
+<li>Shift ($s_n$): advances the input stream creating a new node. Pushes the terminal to the symbol stack and state $n$ to the state stack.</li>
+<li>Reduce ($r_n$): we use grammar rule $n : A\rightarrow\gamma$ to pop off the top $|\gamma|$ entries of the symbol and state stack joining together nodes created while shifting. Finally we push $A$ onto the symbol stack and a new state onto the state stack determined by column $A$ of the top state in the stack.</li>
+<li>Accept (A): accept the text as a member of $G$&rsquo;s language.</li>
+</ol>
+<p>The following is an example of parsing &ldquo;1+1&rdquo; with the above parse table:</p>
+<table>
+  <thead>
+      <tr>
+          <th>State Stack</th>
+          <th>Symbol Stack</th>
+          <th>Input</th>
+          <th>Next Action</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>$</td>
+          <td>1+1$</td>
+          <td>Shift 4</td>
+      </tr>
+      <tr>
+          <td>0 4</td>
+          <td>$1</td>
+          <td>+1$</td>
+          <td>Reduce by $T\rightarrow 1$</td>
+      </tr>
+      <tr>
+          <td>0 2</td>
+          <td>$T</td>
+          <td>+1$</td>
+          <td>Reduce by $E\rightarrow T$</td>
+      </tr>
+      <tr>
+          <td>0 1</td>
+          <td>$E</td>
+          <td>+1$</td>
+          <td>Shift 5</td>
+      </tr>
+      <tr>
+          <td>0 1 5</td>
+          <td>$E+</td>
+          <td>1$</td>
+          <td>Shift 4</td>
+      </tr>
+      <tr>
+          <td>0 1 5 4</td>
+          <td>$E+1</td>
+          <td>$</td>
+          <td>Reduce by $T\rightarrow 1$</td>
+      </tr>
+      <tr>
+          <td>0 1 5 6</td>
+          <td>$E+T</td>
+          <td>$</td>
+          <td>Reduce by $E\rightarrow E+T$</td>
+      </tr>
+      <tr>
+          <td>0 1</td>
+          <td>$E</td>
+          <td>$</td>
+          <td>Accept</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="generating-the-states">
+  Generating the states
+  <a class="heading-link" href="#generating-the-states">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Each state $I_n$ in the parse table represents a set of LR(0) items. Each item is a production rule paired with an index. We usually represent them by inserting
+a dot into the rule at the index, e.g., $E\rightarrow E\cdot+T$.</p>
+<p>Each state is generated by two functions, $\textup{closure}$ and $\textup{goto}$. The first state $I_0$ is generated by the closure of the starting rule, i.e., $I_0=\textup{closure}(S\rightarrow\cdot E$$ $)$.</p>
+<p>The closure of an item $A\rightarrow \alpha\cdot B\beta$ is defined to be the smallest set containing</p>
+<ol>
+<li>the item $A\rightarrow \alpha\cdot B\beta$ itself; and</li>
+<li>every item in $\textup{closure}(B\rightarrow\cdot\gamma)$ for production $B\rightarrow\gamma\in G$.</li>
+</ol>
+<p>For example, for our grammar $G$ the initial state is then</p>
+<p>$I_0={S\rightarrow\cdot E$$ $, E\rightarrow\cdot E+T, E\rightarrow\cdot T, T\rightarrow\cdot 0, T\rightarrow\cdot 1}.$</p>
+<p>To generate the remaining states, we use $\textup{goto}$. $\textup{goto}(I, X)$ is defined to be the union of $\textup{closure}(A\rightarrow\alpha X\cdot\beta)$ for all items $A\rightarrow\alpha\cdot X\beta\in I$. For example,</p>
+<p>$\textup{goto}(I_0, E)=\textup{closure}(S\rightarrow E\cdot$$ $)\cup\textup{closure}(E\rightarrow E\cdot+T).$</p>
+<p>The LR(0) item sets (states) is then the smallest collection of items sets $C$ such that</p>
+<ol>
+<li>$\textup{closure}(S\rightarrow\cdot E)\in C$; and</li>
+<li>$\textup{goto}(I, X)\in C$ for all $I\in C$ and symbols $X\in G$.</li>
+</ol>
+<p>Our example grammar has 7 item sets:</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>$I_0=\textup{closure}(S\rightarrow\cdot E)$</td>
+          <td>$S\rightarrow\cdot E$$ $\ E\rightarrow\cdot E+T\ E\rightarrow\cdot T\ T\rightarrow\cdot 0\ T\rightarrow\cdot 1$</td>
+      </tr>
+      <tr>
+          <td>$I_1=\textup{goto}(I_0,E)$</td>
+          <td>$S\rightarrow E\cdot$$ $\E\rightarrow E\cdot+T$</td>
+      </tr>
+      <tr>
+          <td>$I_2=\textup{goto}(I_0,T)$</td>
+          <td>$E\rightarrow T\cdot$</td>
+      </tr>
+      <tr>
+          <td>$I_3=\textup{goto}(I_0,0)$</td>
+          <td>$T\rightarrow 0\cdot$</td>
+      </tr>
+      <tr>
+          <td>$I_4=\textup{goto}(I_0,1)$</td>
+          <td>$T\rightarrow 1\cdot$</td>
+      </tr>
+      <tr>
+          <td>$I_5=\textup{goto}(I_1,+)$</td>
+          <td>$E\rightarrow E+\cdot T\ T\rightarrow\cdot0\ T\rightarrow\cdot1$</td>
+      </tr>
+      <tr>
+          <td>$I_6=\textup{goto}(I_5,T)$</td>
+          <td>$E\rightarrow E+T\cdot$</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="generating-the-parse-table">
+  Generating the parse table
+  <a class="heading-link" href="#generating-the-parse-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>With our 7 states generated, we need to create the edges connecting them and create the parse table. Luckily $\textup{goto}$ tells us which state goes where. For example, if we are on state $I_0$ and the next symbol on the input is 1, we want to move to state $\textup{goto}(I_0, 1)=I_4$. Since 1 is a terminal in our grammar, we more specifically want to shift then push state $I_4$ to the stack.</p>
+<p>Thus the first row of our parse table is as follows:</p>
+<table>
+  <thead>
+      <tr>
+          <th>State</th>
+          <th>0</th>
+          <th>1</th>
+          <th>+</th>
+          <th>$</th>
+          <th>E</th>
+          <th>T</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>$s_3$</td>
+          <td>$s_4$</td>
+          <td></td>
+          <td></td>
+          <td>1</td>
+          <td>2</td>
+      </tr>
+  </tbody>
+</table>
+<p>Now consider state $I_2={E\rightarrow T\cdot}$. First of all, $\textup{goto}(I_2, X)=\emptyset$ for all $X\in G$ meaning no possible shift actions are available. However, the only item in the set is at the end of a production rule. Thus the proper action is to reduce by $E\rightarrow T$ no matter what the next input symbol is. Giving the following row in our table:</p>
+<table>
+  <thead>
+      <tr>
+          <th>State</th>
+          <th>0</th>
+          <th>1</th>
+          <th>+</th>
+          <th>$</th>
+          <th>E</th>
+          <th>T</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2</td>
+          <td>$r_3$</td>
+          <td>$r_3$</td>
+          <td>$r_3$</td>
+          <td>$r_3$</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<p>What about state $I_1={S\rightarrow E\cdot$$ $, E\rightarrow E\cdot+T}$. Since $\textup{goto}(I_1,+)=I_5$, we want to shift 5 on +. But $S\rightarrow E$$ is our starting state, thus as long as we are at the end of input, we can accept.</p>
+<table>
+  <thead>
+      <tr>
+          <th>State</th>
+          <th>0</th>
+          <th>1</th>
+          <th>+</th>
+          <th>$</th>
+          <th>E</th>
+          <th>T</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td></td>
+          <td></td>
+          <td>$s_5$</td>
+          <td>A</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<p>Generating the rest of the table can be done in the same manner.</p>
+<h2 id="final-thoughts">
+  Final Thoughts
+  <a class="heading-link" href="#final-thoughts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>All of the above has been for LR(0) parsing, LR(1) is more popularily used. The 1 in LR(1) indicates our parser can peek 1 symbol ahead. This allows for a larger collection of parsable grammars. In LR(1) items are of the form $(A\rightarrow \alpha\cdot\beta, x)$ where $x\in G$. This requires slightly different definitions for $\textup{closure}$ and $\textup{goto}$.</p>
+<p>For more details, such as conflict errors, I suggest the following slides: <a href="https://www3.cs.stonybrook.edu/~cram/cse504/Spring16/Lectures/Spring15/lrparser-handout.pdf"  class="external-link" target="_blank" rel="noopener">https://www3.cs.stonybrook.edu/~cram/cse504/Spring16/Lectures/Spring15/lrparser-handout.pdf</a></p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+    integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"
+    integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,
+      {
+        delimiters: [
+          {left: '$$', right: '$$', display:true},
+          {left: '$', right: '$', display:false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ]
+      }
+    );"></script>
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Amber Thrall 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

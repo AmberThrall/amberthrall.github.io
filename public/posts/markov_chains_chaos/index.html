@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Markov chains and chaos · Amber Thrall
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Amber Thrall">
+<meta name="description" content="In my previous post, we explored the dyadic transformation $x_{n&#43;1}=2x_n\bmod1$ on [0,1). We found its behavior was dependent on whether $x_0$ was rational or irrational. We also found if we repeatedly applyed the map to an initial set of particles, its density converged towards the uniform density.
+Lets modify our map. Namely, on [0,1/2) we alter our map to be non-linear.
+
+$$
+    x_{n&#43;1} = \begin{cases}
+        x_n &#43; 2^\alpha x_n^{1&#43;\alpha} & 0\le x_n&lt;1/2 \\
+        2x_n - 1 & 1/2\le x_n&lt;1
+    \end{cases}
+$$
+where $\alpha\in[0,1]$ is some parameter controlling the concavity. Herein we refer to this map as the $\alpha$-map.">
+<meta name="keywords" content="">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Markov chains and chaos">
+  <meta name="twitter:description" content="In my previous post, we explored the dyadic transformation $x_{n&#43;1}=2x_n\bmod1$ on [0,1). We found its behavior was dependent on whether $x_0$ was rational or irrational. We also found if we repeatedly applyed the map to an initial set of particles, its density converged towards the uniform density.
+Lets modify our map. Namely, on [0,1/2) we alter our map to be non-linear. $$ x_{n&#43;1} = \begin{cases} x_n &#43; 2^\alpha x_n^{1&#43;\alpha} &amp; 0\le x_n&lt;1/2 \\ 2x_n - 1 &amp; 1/2\le x_n&lt;1 \end{cases} $$ where $\alpha\in[0,1]$ is some parameter controlling the concavity. Herein we refer to this map as the $\alpha$-map.">
+
+<meta property="og:url" content="http://localhost:1313/posts/markov_chains_chaos/">
+  <meta property="og:site_name" content="Amber Thrall">
+  <meta property="og:title" content="Markov chains and chaos">
+  <meta property="og:description" content="In my previous post, we explored the dyadic transformation $x_{n&#43;1}=2x_n\bmod1$ on [0,1). We found its behavior was dependent on whether $x_0$ was rational or irrational. We also found if we repeatedly applyed the map to an initial set of particles, its density converged towards the uniform density.
+Lets modify our map. Namely, on [0,1/2) we alter our map to be non-linear. $$ x_{n&#43;1} = \begin{cases} x_n &#43; 2^\alpha x_n^{1&#43;\alpha} &amp; 0\le x_n&lt;1/2 \\ 2x_n - 1 &amp; 1/2\le x_n&lt;1 \end{cases} $$ where $\alpha\in[0,1]$ is some parameter controlling the concavity. Herein we refer to this map as the $\alpha$-map.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-11-28T11:37:09-07:00">
+    <meta property="article:modified_time" content="2023-11-28T11:37:09-07:00">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/markov_chains_chaos/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-dark">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Amber Thrall
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/research/">Research</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact Me</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/markov_chains_chaos/">
+              Markov chains and chaos
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-11-28T11:37:09-07:00">
+                November 28, 2023
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              4-minute read
+            </span>
+          </div>
+          
+          
+          
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>In my <a href="/posts/2xmod1" >previous post</a>, we explored the dyadic transformation $x_{n+1}=2x_n\bmod1$ on [0,1). We found its behavior was dependent on whether $x_0$ was rational or irrational. We also found if we repeatedly applyed the map to an initial set of particles, its density converged towards the uniform density.</p>
+<p>Lets modify our map. Namely, on [0,1/2) we alter our map to be non-linear.
+</p>
+$$
+    x_{n+1} = \begin{cases}
+        x_n + 2^\alpha x_n^{1+\alpha} & 0\le x_n<1/2 \\
+        2x_n - 1 & 1/2\le x_n<1
+    \end{cases}
+$$<p>
+where $\alpha\in[0,1]$ is some parameter controlling the concavity. Herein we refer to this map as the $\alpha$-map.</p>
+<p>Looking at an individual orbit of the $\alpha$-map (with $\alpha=0.6$), we see the $\alpha$-map appears to preserve the chaotic nature of the dyadic transformation.</p>
+<p><img src="/images/orbit_alphamap.png" alt="Orbit"></p>
+<p>Unfortutely, proving that is chaotic is not as simple as before. It is also not as simple to determine its invariant density. With the dyadic transformation we made use of <em>transfer operators</em>.</p>
+<p><strong>Definition</strong>.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> Let $f:M\rightarrow M$ be a surjective map such that the preimage $f^{-1}(x)$ is finite or countable for each $x\in M$. The <em>Ruelle transfer operator</em> $\mathcal{L}<em>f:\mathcal{F}(M,\mathbb{C})\rightarrow\mathcal{F}(M,\mathbb{C})$, where $\mathcal{F}(M,\mathbb{C})$ is the vector space of functions from $M$ to $\mathbb{C}$, is the linear operator given by
+$$
+    (\mathcal{L}_f\varphi)(x) = \sum_{y\in f^{-1}(x)}\frac{\varphi(y)}{|\det Df(y)|}.
+$$
+Some sources replace the Jacobian determinant with a more general function $g$ with the constraint that $\sum</em>{y\in f^{-1}(x)}g(y)$ converges for all $x$.</p>
+<p>Once you&rsquo;ve computed the transfer operator of a map, its corresponding invariant density would be given by finding the eigenfunction corresponding to the eigenvalue 1.</p>
+<p>For example, if we generalize the dyadic transformation to the form
+</p>
+$$
+    x_{n+1} = rx_n\bmod1
+$$<p>
+for some positive integer $r$, then we can find the induced transfer operator is of the form
+</p>
+$$
+    (\mathcal{L}_r\rho)(x) = \frac{1}{r}\sum_{k=0}^{r-1}\rho\left(\frac{x+k}{r}\right).
+$$<p>
+From here it is clear that the uniform density $\rho(x)=1$ is the invariant density since $\mathcal{L}\rho=\rho$.</p>
+<p>However, if we try to find the transfer operator for the $\alpha$-map we reach a dilemma. While inverting $x_{n+1}=2x_n-1$ is trivial, finding the inverse of $x_{n+1}=x_n+2^\alpha x_n^{1+\alpha}$ is not. We need a different technique.</p>
+<p>Enter Markov chains! If we partition our space [0,1) into a finite set of intervals $I_1,\dots,I_n$, then we can use Markov chains to approximate the invariant density. Namely, we use the transition matrix $P$ where $p_{ij}$ is the probability that if $x\in I_i$ then $f(x)\in I_j$. This we can compute with the image, i.e.,
+</p>
+$$
+    p_{ij} = \frac{m(f(I_i)\cap I_j)}{m(f(I_i))},
+$$<p>
+where $m$ is the Lebesgue measure. Lets test this on our dyadic transformation. If we partition [0,1) into [0,1/2) and [1/2,1) we get the following Markov chain:</p>
+<p><img src="/images/dyadic_markov_chain.png" alt="Orbit"></p>
+<p>If you remember Markov chains, to find the invariant distribution we find the left eigenvector of the transition matrix corresponding to the eigenvalue 1, i.e., the vector $\pi$ such that $\pi P=\pi$. The transition matrix for the Markov chain above is given by
+</p>
+$$
+    P = \frac{1}{2}\begin{bmatrix} 1 & 1\\ 1 & 1 \end{bmatrix}.
+$$<p>
+and $(1/2,1/2)P = (1/2,1/2)$. Converting this back to density functions we get that the dyadic transformation has an invariant density of
+</p>
+$$
+    \rho(x) \approx \frac{\pi_i}{m(I_i)}, x\in I_i,
+$$<p>
+which for the dyadic transformation gives us $\rho(x)\approx 1$, the exact solution.</p>
+<p>With this method, we can approximate the invariant density for the $\alpha$-map as finding the image is much easier than the preimage. The first question is how to form our partition? Through numerical simulations we found that the invariant density appears to be propotional to $x^{-\beta}$ for some unknown contant $\beta$. This result makes sense. If you look at the flow of the $\alpha$-map, we find it&rsquo;s smallest near zero. Therefore, we expect particles to cluster around zero.</p>
+<p>So our partition should have smaller bins near zero and larger bins near one. One way to accomplish this is to take the partition $P_n={0=b_0&lt;b_1&lt;\cdots&lt;b_k=1}$ where $b_i=\left(\frac{i}{k}\right)^n$. Then as $n$ increases we should get better approximations. If we then approximate the exponent $\beta$, we get the data below:</p>
+<table>
+  <thead>
+      <tr>
+          <th>$\alpha$</th>
+          <th>$P_4$</th>
+          <th>$P_5$</th>
+          <th>$P_6$</th>
+          <th>$P_7$</th>
+          <th>$P_8$</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0.2</td>
+          <td>-0.1687</td>
+          <td>-0.1808</td>
+          <td>-0.1883</td>
+          <td>-0.1943</td>
+          <td>-0.1965</td>
+      </tr>
+      <tr>
+          <td>0.4</td>
+          <td>-0.3886</td>
+          <td>-0.3959</td>
+          <td>-0.3985</td>
+          <td>-0.3995</td>
+          <td>-0.3998</td>
+      </tr>
+      <tr>
+          <td>0.6</td>
+          <td>-0.5972</td>
+          <td>-0.5994</td>
+          <td>-0.5999</td>
+          <td>-0.5999</td>
+          <td>-0.5999</td>
+      </tr>
+      <tr>
+          <td>0.8</td>
+          <td>-0.7994</td>
+          <td>-0.7999</td>
+          <td>-0.7999</td>
+          <td>-0.7999</td>
+          <td>-0.8</td>
+      </tr>
+  </tbody>
+</table>
+<p>Notice that the exponent $\beta$ appears to converge to $-\alpha$ as $n$ grows larger.</p>
+<p><strong>Conjecture.</strong> The $\alpha$-map has an invariant density of $\rho(x)=(1-\alpha)x^{-\alpha}$.</p>
+<h2 id="references">
+  References
+  <a class="heading-link" href="#references">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>David Ruelle. Dynamical zeta functions and transfer operators. <em>Notices of the AMS</em>, 49(8):887–895, 2002.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+    integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"
+    integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,
+      {
+        delimiters: [
+          {left: '$$', right: '$$', display:true},
+          {left: '$', right: '$', display:false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ]
+      }
+    );"></script>
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Amber Thrall 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

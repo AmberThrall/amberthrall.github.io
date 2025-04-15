@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Prime number generation · Amber Thrall
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Amber Thrall">
+<meta name="description" content="A prime number $n$ is an integer greater than 1 such that it&rsquo;s only divisors are 1 and $n$. While this may seem like a uninteresting property, prime numbers turn out to be very important
+to cryptography. Most cryptography implementations work by using the prime factors of large numbers, requiring the prime factors to decrypt the data.
+One interesting exercise is that in prime number generation. We will go over two methods, a slow brute force method, and a much faster algorithm known as sieve of Eratosthenes.">
+<meta name="keywords" content="">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Prime number generation">
+  <meta name="twitter:description" content="A prime number $n$ is an integer greater than 1 such that it’s only divisors are 1 and $n$. While this may seem like a uninteresting property, prime numbers turn out to be very important to cryptography. Most cryptography implementations work by using the prime factors of large numbers, requiring the prime factors to decrypt the data.
+One interesting exercise is that in prime number generation. We will go over two methods, a slow brute force method, and a much faster algorithm known as sieve of Eratosthenes.">
+
+<meta property="og:url" content="http://localhost:1313/posts/sieve_of_eratosthenes/">
+  <meta property="og:site_name" content="Amber Thrall">
+  <meta property="og:title" content="Prime number generation">
+  <meta property="og:description" content="A prime number $n$ is an integer greater than 1 such that it’s only divisors are 1 and $n$. While this may seem like a uninteresting property, prime numbers turn out to be very important to cryptography. Most cryptography implementations work by using the prime factors of large numbers, requiring the prime factors to decrypt the data.
+One interesting exercise is that in prime number generation. We will go over two methods, a slow brute force method, and a much faster algorithm known as sieve of Eratosthenes.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-01-18T11:37:09-07:00">
+    <meta property="article:modified_time" content="2022-01-18T11:37:09-07:00">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/sieve_of_eratosthenes/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-dark">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Amber Thrall
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/research/">Research</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact Me</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/sieve_of_eratosthenes/">
+              Prime number generation
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-01-18T11:37:09-07:00">
+                January 18, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          
+          
+          
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>A <strong>prime number</strong> $n$ is an integer greater than 1 such that it&rsquo;s only divisors are 1 and $n$. While this may seem like a uninteresting property, prime numbers turn out to be very important
+to cryptography. Most cryptography implementations work by using the prime factors of large numbers, requiring the prime factors to decrypt the data.</p>
+<p>One interesting exercise is that in prime number generation. We will go over two methods, a slow brute force method, and a much faster algorithm known as <strong>sieve of Eratosthenes</strong>.</p>
+<h2 id="slow-method">
+  Slow Method
+  <a class="heading-link" href="#slow-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>One simple method of generating all primes from 2 to $n$, is to brute force it by simply checking each number.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff7b72">def</span> <span style="color:#d2a8ff;font-weight:bold">is_prime</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">for</span> x <span style="color:#ff7b72;font-weight:bold">in</span> range(<span style="color:#a5d6ff">2</span>, int(n<span style="color:#ff7b72;font-weight:bold">/</span><span style="color:#a5d6ff">2</span>)):
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">if</span> n <span style="color:#ff7b72;font-weight:bold">%</span> x <span style="color:#ff7b72;font-weight:bold">==</span> <span style="color:#a5d6ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff7b72">return</span> <span style="color:#79c0ff">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">return</span> <span style="color:#79c0ff">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">def</span> <span style="color:#d2a8ff;font-weight:bold">slow_method</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">return</span> list(filter(<span style="color:#ff7b72">lambda</span> x: is_prime(x), range(<span style="color:#a5d6ff">2</span>, n <span style="color:#ff7b72;font-weight:bold">+</span> <span style="color:#a5d6ff">1</span>)))
+</span></span></code></pre></div><p>In the above code, we generate a list of integers 2, 3, &hellip;, $n$. Then for each integer, we determine if it has a divisor other than 1 or itself. If so we remove it from the list.</p>
+<p>As we will see later on, this is a terribly slow method to use.</p>
+<h2 id="sieve-of-eratosthenes">
+  Sieve of Eratosthenes
+  <a class="heading-link" href="#sieve-of-eratosthenes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The sieve of Eratosthenes is an algorithm dating all the way back to the 2nd century (it first appeared in Nicomachus of Gerasa&rsquo;s <em>Introduction to Arithmetic</em><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>) and is still one of the most efficient methods
+of generating prime numbers.</p>
+<p>To find all primes from 2 to $n$, one can use the following algorithm:</p>
+<ol>
+<li>Create a list of integers from 2 to $n$.</li>
+<li>Let $p$ equal 2.</li>
+<li>Mark off multiples of $p$ from $2p$ to $n$ from the list.</li>
+<li>Let $p$ be the smallest number in the list greater than $p$. If no such number exists, the remaining numbers are prime. If such a $p$ does exist, repeat step 3.</li>
+</ol>
+<p>Converting this algorithm into Python results in the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff7b72">def</span> <span style="color:#d2a8ff;font-weight:bold">sieve</span>(n):
+</span></span><span style="display:flex;"><span>    a <span style="color:#ff7b72;font-weight:bold">=</span> dict(zip(range(<span style="color:#a5d6ff">2</span>, n <span style="color:#ff7b72;font-weight:bold">+</span> <span style="color:#a5d6ff">1</span>), [<span style="color:#79c0ff">True</span>] <span style="color:#ff7b72;font-weight:bold">*</span> (n<span style="color:#ff7b72;font-weight:bold">-</span><span style="color:#a5d6ff">1</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">for</span> p <span style="color:#ff7b72;font-weight:bold">in</span> range(<span style="color:#a5d6ff">2</span>, n):
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">if</span> a[p]:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff7b72">for</span> i <span style="color:#ff7b72;font-weight:bold">in</span> range(<span style="color:#a5d6ff">2</span> <span style="color:#ff7b72;font-weight:bold">*</span> p, n <span style="color:#ff7b72;font-weight:bold">+</span> <span style="color:#a5d6ff">1</span>, p):
+</span></span><span style="display:flex;"><span>                a[i] <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#79c0ff">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">return</span> [ i <span style="color:#ff7b72">for</span> i <span style="color:#ff7b72;font-weight:bold">in</span> a <span style="color:#ff7b72">if</span> a[i] ]
+</span></span></code></pre></div><p>You can further optimize this algorithm by marking off the numbers $p^2$, $p^2+p$, $p^2+2p$, etc. in step 3.</p>
+<h2 id="comparisons">
+  Comparisons
+  <a class="heading-link" href="#comparisons">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Using both methods, I generated all primes between 2 and 1,000,000. The slow method took approximately 774 seconds, where as the sieve method took approximately 0.57 seconds.
+In terms of big-O notation, our slow method is $O(n^2)$ where as the sieve is $O(n\log\log n)$.</p>
+<h2 id="references">
+  References
+  <a class="heading-link" href="#references">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Sieve of Erathosthenes. In <em>Wikipedia</em>.
+<a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes"  class="external-link" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+    integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"
+    integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,
+      {
+        delimiters: [
+          {left: '$$', right: '$$', display:true},
+          {left: '$', right: '$', display:false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ]
+      }
+    );"></script>
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Amber Thrall 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
