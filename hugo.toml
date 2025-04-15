@@ -1,10 +1,14 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://amber.thrall.me/'
 languageCode = 'en-us'
 title = 'Amber Thrall'
 theme = "hugo-coder"
 
 [pagination]
 pagerSize = 20
+
+[caches]
+[caches.images]
+dir = ':cacheDir/images'
 
 [markup]
   [markup.goldmark]
