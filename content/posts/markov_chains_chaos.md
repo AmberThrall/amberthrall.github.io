@@ -1,6 +1,6 @@
 +++
 date = '2023-11-28T11:37:09-07:00'
-draft = true
+draft = false 
 title = 'Markov chains and chaos'
 +++
 
