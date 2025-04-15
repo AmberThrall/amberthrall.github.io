@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  A simple example of chaos in 1D · Amber Thrall
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Amber Thrall">
+<meta name="description" content="In Nonlinear Dynamics and Chaos by Steven Strogatz, the following definition of chaos is given:
+
+Chaos is aperiodic long-term behavior in a deterministic system that exhibits sensitive dependence on initial conditions. (Strogatz, p. 331)
+
+  The Dyadic Transformation
+  
+    
+    Link to heading
+  
+
+On $[0,1)$ define the recurrence relation
+$$
+x_{n&#43;1} = 2x_n\bmod1 = \begin{cases}
+    2x_n & x_n &lt; 1/2 \\
+    2x_n-1 & x_n \ge 1/2
+\end{cases}.
+$$The above relation forms a discrete dynamical system on the space $[0,1)$. Consider the following graph of an orbit.">
+<meta name="keywords" content="">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A simple example of chaos in 1D">
+  <meta name="twitter:description" content="In Nonlinear Dynamics and Chaos by Steven Strogatz, the following definition of chaos is given:
+Chaos is aperiodic long-term behavior in a deterministic system that exhibits sensitive dependence on initial conditions. (Strogatz, p. 331)
+The Dyadic Transformation Link to heading On $[0,1)$ define the recurrence relation
+$$ x_{n&#43;1} = 2x_n\bmod1 = \begin{cases} 2x_n &amp; x_n &lt; 1/2 \\ 2x_n-1 &amp; x_n \ge 1/2 \end{cases}. $$The above relation forms a discrete dynamical system on the space $[0,1)$. Consider the following graph of an orbit.">
+
+<meta property="og:url" content="http://localhost:1313/posts/2xmod1/">
+  <meta property="og:site_name" content="Amber Thrall">
+  <meta property="og:title" content="A simple example of chaos in 1D">
+  <meta property="og:description" content="In Nonlinear Dynamics and Chaos by Steven Strogatz, the following definition of chaos is given:
+Chaos is aperiodic long-term behavior in a deterministic system that exhibits sensitive dependence on initial conditions. (Strogatz, p. 331)
+The Dyadic Transformation Link to heading On $[0,1)$ define the recurrence relation
+$$ x_{n&#43;1} = 2x_n\bmod1 = \begin{cases} 2x_n &amp; x_n &lt; 1/2 \\ 2x_n-1 &amp; x_n \ge 1/2 \end{cases}. $$The above relation forms a discrete dynamical system on the space $[0,1)$. Consider the following graph of an orbit.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-10-03T11:37:09-07:00">
+    <meta property="article:modified_time" content="2023-10-03T11:37:09-07:00">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2xmod1/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-dark">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Amber Thrall
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/research/">Research</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact Me</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2xmod1/">
+              A simple example of chaos in 1D
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-10-03T11:37:09-07:00">
+                October 3, 2023
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          
+          
+          
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>In Nonlinear Dynamics and Chaos by Steven Strogatz, the following definition of chaos is given:</p>
+<blockquote>
+<p><strong>Chaos</strong> is aperiodic long-term behavior in a deterministic system that exhibits sensitive dependence on initial conditions. (Strogatz, p. 331)</p></blockquote>
+<h2 id="the-dyadic-transformation">
+  The Dyadic Transformation
+  <a class="heading-link" href="#the-dyadic-transformation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>On $[0,1)$ define the recurrence relation</p>
+$$
+x_{n+1} = 2x_n\bmod1 = \begin{cases}
+    2x_n & x_n < 1/2 \\
+    2x_n-1 & x_n \ge 1/2
+\end{cases}.
+$$<p>The above relation forms a discrete dynamical system on the space $[0,1)$. Consider the following graph of an orbit.</p>
+<p><img src="/images/dyadic_orbit.png" alt="Orbit"></p>
+<p>The orbit appears <em>chaotic</em>. However, as we will see later whether ${x_n}$ is periodic depends on our initial condition $x_1$.</p>
+<p>It is worth noting some computation issues with this system. Consider the number 0.15625 in float32:</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Float_example.svg" alt="float32 bits"></p>
+<p>Then the value is converted by
+</p>
+$$(-1)^{b_{31}}\times2^{(b_{30}b_{29}\cdots b_{23})_2-127}\times(1.b_{22}b_{21}\cdots b_{0})_2.$$<p>Notice that for $x_n=a_n/2^k$, with $k&gt;0$
+</p>
+$$ x_{n+1} = 2\left(\frac{a_n}{2^k}\right)\bmod1 = \frac{a_n\bmod 2^{k-1}}{2^{k-1}}. $$<p>Therefore, $x_n$ will converge to 0. We can see this in action in the table below.</p>
+<!-- raw HTML omitted -->
+<p>We could avoid this problem by using different bases in our representation. However, this still doesn&rsquo;t capture the chaotic behavior. For example, consider the orbit starting at 1/5:</p>
+$$\frac{1}{5}\rightarrow\frac{2}{5}\rightarrow\frac{4}{5}\rightarrow\frac{3}{5}\rightarrow\frac{1}{5}.$$<p>The sequence starting at 1/5 is periodic with period 4.</p>
+<p><strong>Thereom</strong>. If $x_1$ is rational, then ${x_n}$ converges or is eventually periodic.</p>
+<p><em>Proof</em>. Let $x_n=a_n/b$. Then
+</p>
+$$ x_{n+1} = 2\left(\frac{a_n}{b}\right)\bmod 1 = \frac{2a_n\bmod b}{b}. $$<p>
+So the set of possible values for $x_{n+1}$ is ${0/b,1/b,\dots,(b-1)/b}$ which is finite. Therefore, $x_n=x_{n+p}$ for some $p\in\mathbb{N}$.
+<!-- raw HTML omitted -->$\Box$<!-- raw HTML omitted --></p>
+<p>If our system does actually exhibit chaos, then it must be with an irrational number. While we can&rsquo;t use floats to represent irrational numbers, there are other tricks we can use. Our system turns out to work nicely if the term is expressed in binary since multiplying by 2 is equivalent to bit shifting one to the left.</p>
+<p>Let $x=(0.a_1a_2a_3\cdots)_2$ be the binary representation. Then bit shifting gives $2x=(a_1.a_2a_3a_4\cdots)_2$. If $a_1=1$, then when we take the modulus we simply drop $a_1$. So
+</p>
+$$2x\bmod1 = (0.a_2a_3a_4\cdots)_2.$$<p>The orbit graph above was formed by taking a random sequence of 0&rsquo;s and 1&rsquo;s then repeatedly removing the first element of the sequence and plotting the approximate value.</p>
+<p><strong>Theorem</strong>. If $x_1$ is irrational, then ${x_n}$ is aperiodic.</p>
+<p><em>Proof.</em> Express $x_1$ in binary, i.e., $x_1 = (0.a_1a_2a_3a_4\cdots)_2$.
+Then
+</p>
+$$ x_n = (0.a_na_{n+1}a_{n+2}a_{n+3}\cdots)_2.$$<p>
+Since $x_1$ is irrational, the digits $a_1,a_2,\dots$ have no repetition. Therefore, ${x_n}$ is aperiodic. <!-- raw HTML omitted -->$\Box$<!-- raw HTML omitted --></p>
+<h2 id="distribution-dynamics">
+  Distribution Dynamics
+  <a class="heading-link" href="#distribution-dynamics">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Assume we have a subset $X\subset[0,1)$ with some probability density $\rho_1(x)$. In other words, the probability that some $x\in A\subset X$ is given by
+</p>
+$$\mathbb{P}(x\in A) = \int_A \rho_1(x)\textup{d}{x}.$$<p>We are interested in how the distribution changes over time. More precisely, let $\rho_2$ be the probability density of the image $(2x\bmod1)(X)$. Repeating this, forms a sequence of probability density functions ${\rho_n}$.</p>
+<p>We want to find a linear operator $\mathcal{L}$ such that for any density $\rho_n$, $\rho_{n+1}=\mathcal{L}\rho_n$. If such an operator exists, then
+</p>
+$$\mathbb{P}(x_{n+1}\in A) = \mathbb{P}(x_n\in(2x\bmod1)^{-1}(A)).$$<p>
+So
+</p>
+$$ \int_A\mathcal{L}\rho(x)\textup{d}x = \int_{(2x\bmod1)^{-1}(A)}\rho(x)\textup{d}x.$$<p>To determine the operator $\mathcal{L}$, let $A=[0,y]$ for some $y\in[0,1)$. Note that $2x\bmod 1$ is two-to-one, and we can explicity determine the preimage. That is,
+</p>
+$$(2x\bmod1)^{-1}([0,y]) = \left[0,\frac{y}{2}\right]\cup\left[\frac{1}{2},\frac{y+1}{2}\right].$$<p>So
+</p>
+$$
+\begin{align*}
+    \int_0^y\mathcal{L}\rho(x)\textup{d}x &= \int_{(2x\bmod1)^{-1}([0,y])}\rho(x)\textup{d}x \\
+    &= \int_0^{y/2}\rho(x)\textup{d}x + \int_{1/2}^{\frac{y+1}{2}}\rho(x)\textup{d}x.
+\end{align*}
+$$<p>
+Differentiating both sides gives
+</p>
+$$ \mathcal{L}\rho(x) = \frac{1}{2}\rho\left(\frac{x}{2}\right) + \frac{1}{2}\rho\left(\frac{x+1}{2}\right).$$<p><strong>Remark.</strong> The linear operator $\mathcal{L}$ is a <a href="https://en.wikipedia.org/wiki/Transfer_operator"  class="external-link" target="_blank" rel="noopener">Ruelle transfer operator</a>.</p>
+<p>With our operator $\mathcal{L}$, we get the sequence of density functions $\rho_n=\mathcal{L}^n\rho_1$. Consider the limit
+</p>
+$$\lim_{n\rightarrow\infty}\mathcal{L}^n\rho_1=\rho_\infty.$$<p>
+If the limit exists, then $\mathcal{L}\rho_\infty=\rho_\infty$. That is $\rho_\infty$ is the <em>invariant</em> density under $\mathcal{L}$. Notice that if $\rho(x)=1$, then
+</p>
+$$\mathcal{L}\rho(x) = \frac{1}{2}\rho\left(\frac{x}{2}\right) + \frac{1}{2}\rho\left(\frac{x+1}{2}\right) = 1.$$<p>
+Therefore, the uniform density $\rho(x)=1$ is the invariant density under $\mathcal{L}$.</p>
+<p>This tells us that for any initial density of particles, repeatedly applying $2x\bmod1$ results in the particles spreading out to the uniform density.</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+    integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"
+    integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,
+      {
+        delimiters: [
+          {left: '$$', right: '$$', display:true},
+          {left: '$', right: '$', display:false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ]
+      }
+    );"></script>
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Amber Thrall 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
