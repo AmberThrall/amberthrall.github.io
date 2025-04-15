@@ -35,33 +35,43 @@ Some sources replace the Jacobian determinant with a more general function $g$ w
 Once you've computed the transfer operator of a map, its corresponding invariant density would be given by finding the eigenfunction corresponding to the eigenvalue 1.
 
 For example, if we generalize the dyadic transformation to the form
+
 $$
     x_{n+1} = rx_n\bmod1
 $$
+
 for some positive integer $r$, then we can find the induced transfer operator is of the form 
+
 $$
     (\mathcal{L}_r\rho)(x) = \frac{1}{r}\sum_{k=0}^{r-1}\rho\left(\frac{x+k}{r}\right).
 $$
+
 From here it is clear that the uniform density $\rho(x)=1$ is the invariant density since $\mathcal{L}\rho=\rho$.
 
 However, if we try to find the transfer operator for the $\alpha$-map we reach a dilemma. While inverting $x_{n+1}=2x_n-1$ is trivial, finding the inverse of $x_{n+1}=x_n+2^\alpha x_n^{1+\alpha}$ is not. We need a different technique.
 
 Enter Markov chains! If we partition our space [0,1) into a finite set of intervals $I_1,\dots,I_n$, then we can use Markov chains to approximate the invariant density. Namely, we use the transition matrix $P$ where $p_{ij}$ is the probability that if $x\in I_i$ then $f(x)\in I_j$. This we can compute with the image, i.e., 
+
 $$
     p_{ij} = \frac{m(f(I_i)\cap I_j)}{m(f(I_i))},
 $$
+
 where $m$ is the Lebesgue measure. Lets test this on our dyadic transformation. If we partition [0,1) into [0,1/2) and [1/2,1) we get the following Markov chain:
 
 ![Orbit](/images/dyadic_markov_chain.png)
 
 If you remember Markov chains, to find the invariant distribution we find the left eigenvector of the transition matrix corresponding to the eigenvalue 1, i.e., the vector $\pi$ such that $\pi P=\pi$. The transition matrix for the Markov chain above is given by 
+
 $$
     P = \frac{1}{2}\begin{bmatrix} 1 & 1\\ 1 & 1 \end{bmatrix}.
 $$
+
 and $(1/2,1/2)P = (1/2,1/2)$. Converting this back to density functions we get that the dyadic transformation has an invariant density of 
+
 $$
     \rho(x) \approx \frac{\pi_i}{m(I_i)}, x\in I_i,
 $$
+
 which for the dyadic transformation gives us $\rho(x)\approx 1$, the exact solution.
 
 With this method, we can approximate the invariant density for the $\alpha$-map as finding the image is much easier than the preimage. The first question is how to form our partition? Through numerical simulations we found that the invariant density appears to be propotional to $x^{-\beta}$ for some unknown contant $\beta$. This result makes sense. If you look at the flow of the $\alpha$-map, we find it's smallest near zero. Therefore, we expect particles to cluster around zero.
