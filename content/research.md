@@ -6,7 +6,7 @@ title = 'Research'
 
 ## Computational Topology
 
-[Steinhaus Filtration and Stable Paths in the Mapper](https://arxiv.org/abs/1906.08256), [Symposium on Computational Geometry 2025](https://socg25.github.io/socg.html).
+[Steinhaus Filtration and Stable Paths in the Mapper](https://arxiv.org/abs/1906.08256), [Symposium on Computational Geometry](https://socg25.github.io/socg.html), 2025.
 
 **Abstract:** We define a new filtration called the Steinhaus filtration built from a single cover based on a generalized Steinhaus distance, a generalization of Jaccard distance. 
 The homology persistence module of a Steinhaus filtration with infinitely many cover elements may not be $q$-tame, even when the covers are in a totally bounded space. 
