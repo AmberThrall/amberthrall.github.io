@@ -24,3 +24,9 @@ The necessary and sufficient condition there is also shown to be sufficient for 
 **Abstract:** The nonnegative inverse eigenvalue problem (NIEP) is to characterize the spectra of entrywise nonnegative matrices. 
 Johnson conjectured that the list of critical points must be realizable. 
 In this work, Johnson's conjecture, and consequently Monov's conjecture, is established for a variety of important cases including Ciarlet spectra, Suleĭmanova spectra, spectra realizable via companion matrices, and spectra realizable via similarity by a complex Hadamard matrix. 
+
+# Presentations 
+
+- CG Week 2025, Kanazawa, JPN. June 23-27, 2025.
+- Undergraduate Poster Session at the Joint Mathematics Meetings, San Diego, CA. January 12, 2018.
+- University of Washington Undergraduate Research Symposium, Seattle, WA. May 18, 2017.
